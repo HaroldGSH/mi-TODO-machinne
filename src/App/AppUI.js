@@ -1,4 +1,6 @@
 import React from 'react';
+import { TodoContext } from '../TodoContext';
+import { TodoHeader } from '../TodoHeader';
 import { TodoCounter } from '../TodoCounter';
 import { TodoSearch } from '../TodoSearch';
 import { TodoList } from '../TodoList';
@@ -9,28 +11,35 @@ import { EmptyTodos } from '../EmptyTodos';
 import { TodoButton } from '../TodoButton';
 import { TodoForm } from '../TodoForm';
 import { Modal } from '../Modal';
-import { TodoContext } from '../TodoContext';
+
 
 function AppUI(){
-  const {loading, error, completeTodo, searchedTodos, deleteTodo, openModal, setOpenModal} = React.useContext(TodoContext);
-  //loading,
-  //error,
-  //completedTodos,
-  //totalTodos,
-  //searchValue,
-  //setSearchValue,
-  //searchedTodos,
-  //completeTodo,
-  //deleteTodo,
-//} {
+  const {
+    loading, 
+    error, 
+    completeTodo, 
+    searchedTodos, 
+    deleteTodo, 
+    openModal,
+    setOpenModal,
+    totalTodos, 
+    completedTodos,
+    searchValue,
+    setSearchValue} = React.useContext(TodoContext);
+  
 return (
     <>
-      <TodoCounter />
-      <TodoSearch />
+     <TodoHeader>
+      <TodoCounter 
+       totalTodos = {totalTodos}
+       completedTodos={completedTodos}/>
+ 
+       <TodoSearch 
+       searchValue ={searchValue}
+       setSearchValue={setSearchValue}/>
+     </TodoHeader>
+      
       <TodoList>
-     {/* {loading && <p>Estamos cargando...</p>}
-      {error && <p>Desespérate, hubo un error!!</p>}
-      {(!loading && searchedTodos.length === 0) && <p>¡Crea tu primer TODO!</p>} */}
        {loading && (
           <>
             <TodosLoading />
@@ -49,9 +58,7 @@ return (
             onDelete={() => deleteTodo(todo.text)}
           />
         ))}
-        {/*<TodoItem/>
-        <TodoItem/>
-         <TodoItem/>*/ }
+    
       </TodoList>
       
       <TodoButton setOpenModal={setOpenModal}/>
