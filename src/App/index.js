@@ -11,6 +11,7 @@ import { EmptyTodos } from '../EmptyTodos';
 import { TodoButton } from '../TodoButton';
 import { TodoForm } from '../TodoForm';
 import { Modal } from '../Modal';
+import { ChangeAlert } from '../ChangeAlert';
 
 function App() { 
   const {
@@ -26,6 +27,7 @@ function App() {
     searchValue,
     setSearchValue,
     addTodo,
+    sincronizeTodos,
   } = useTodos();
   
   return(
@@ -76,26 +78,7 @@ function App() {
           />
         )}
       </TodoList>
-
-       {/*{loading && (
-          <>
-            <TodosLoading />
-            <TodosLoading />
-            <TodosLoading />
-          </>
-        )}
-        {error && <TodosError/>}
-        {(!loading && searchedTodos.length === 0) && <EmptyTodos />}
-        {searchedTodos.map(todo => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeTodo(todo.text)}
-            onDelete={() => deleteTodo(todo.text)}
-          />
-        ))} */}
-      
+    
       <TodoButton setOpenModal={setOpenModal}/>
       {openModal && (
         <Modal>
@@ -104,6 +87,9 @@ function App() {
           setOpenModal={setOpenModal}/>
         </Modal>
       )}
+      <ChangeAlert
+        sincronize = {sincronizeTodos}
+      />
     </>
    );
   }
