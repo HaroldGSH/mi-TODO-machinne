@@ -27,7 +27,7 @@ function useLocalStorage(itemName, initialValue) {
           parsedItem = JSON.parse(localStorageItem);
         }
         
-        onSucces(item)
+        onSucces(parsedItem)
         
       } catch(error) {
         onError(error);
